@@ -7,17 +7,11 @@
 
 import Foundation
 import Combine
-import RealmSwift
 
 final class HomeScreenViewModel: ObservableObject {
 
-    //MARK: - Private Static Properties
-
+    //MARK: - Private Value Types
     private enum Constants {
-        static let baseUrl = "https://api.openweathermap.org/data/2.5/"
-        static let weatherPart = "weather"
-        static let forecastPart = "forecast"
-        static let apiKey = "0cd74bf29e43ef1ad6afd6861cc99eb2"
         static let storedCitiesIds: [UInt] = [2643743,
                                               293396,
                                               5128581,
@@ -39,7 +33,6 @@ final class HomeScreenViewModel: ObservableObject {
 
     //MARK: - @Published Properties
     @Published var queryString = ""
-
     @Published var models: [WeatherDTO] = []
     @Published var inProgress = false
 
@@ -49,31 +42,30 @@ final class HomeScreenViewModel: ObservableObject {
             return models
         } else {
             let filtreModels = models.filter { model in
-                return model.cityName.contains(queryString)
+                return model.cityName.lowercased().range(of: queryString.lowercased()) != nil 
             }
             return filtreModels
         }
     }
 
-
     //MARK: - Private Properties
     private var cancellableSet: Set<AnyCancellable> = []
-    private let networkClient = NetworkClient()
+    private let weatherClient = WeatherClientImpl(networkClient: NetworkClient())
     private let reachability = ReachabilityManager()
+    private let realmClient = RealmClient()
 
     //MARK: - Public Func
-
     func getWeather() {
         inProgress = true
 
         guard reachability.connectionAvailable() else {
-            models = getFromDB().map({ $0.asWeatherDTO })
+            models = realmClient.getFromDB().map({ $0.asWeatherDTO })
             self.inProgress = false
             return
         }
 
         Constants.storedCitiesIds.map{ id in
-            networkClient.getCurrentWeather(path: getPath(id: id)).eraseToAnyPublisher()
+            weatherClient.getCurrentWeather(id: id).eraseToAnyPublisher()
         }
         .publisher
         .flatMap { $0 }
@@ -89,7 +81,7 @@ final class HomeScreenViewModel: ObservableObject {
             }
             DispatchQueue.main.async {
                 self.models = dto
-                self.saveToDB(dto: dto)
+                self.realmClient.saveToDB(dto: dto)
                 self.inProgress = false
             }
         }
@@ -99,28 +91,5 @@ final class HomeScreenViewModel: ObservableObject {
     func invalidate() {
         cancellableSet.forEach { $0.cancel() }
         cancellableSet.removeAll()
-    }
-
-    //MARK: - Private Func
-
-    private func getPath(id: UInt) -> String {
-        "\(Constants.baseUrl)\(Constants.weatherPart)?id=\("\(id)")&appid=\(Constants.apiKey)"
-    }
-
-    private func saveToDB(dto: [WeatherDTO]) {
-        let localRealm = try! Realm()
-        try! localRealm.write {
-            localRealm.deleteAll()
-        }
-
-        dto.forEach { weatherDTO in
-            try! localRealm.write({
-                localRealm.add(WeatherDB(dto: weatherDTO))
-            })
-        }
-    }
-
-    private func getFromDB() -> [WeatherDB] {
-        return try! Realm().objects(WeatherDB.self).map { $0 }
     }
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		034F5E7128AD53B80000926A /* WeatherClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034F5E7028AD53B80000926A /* WeatherClient.swift */; };
+		034F5E7328AD5C280000926A /* RealmClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034F5E7228AD5C280000926A /* RealmClient.swift */; };
 		0377C61028AAC88F00575DA4 /* weatherTestAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377C60F28AAC88F00575DA4 /* weatherTestAppApp.swift */; };
 		0377C61228AAC88F00575DA4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377C61128AAC88F00575DA4 /* ContentView.swift */; };
 		0377C61428AAC89000575DA4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0377C61328AAC89000575DA4 /* Assets.xcassets */; };
@@ -31,6 +33,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		034F5E7028AD53B80000926A /* WeatherClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherClient.swift; sourceTree = "<group>"; };
+		034F5E7228AD5C280000926A /* RealmClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmClient.swift; sourceTree = "<group>"; };
 		0377C60C28AAC88F00575DA4 /* weatherTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weatherTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0377C60F28AAC88F00575DA4 /* weatherTestAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weatherTestAppApp.swift; sourceTree = "<group>"; };
 		0377C61128AAC88F00575DA4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -108,8 +112,10 @@
 			isa = PBXGroup;
 			children = (
 				0377C61E28AAC8CE00575DA4 /* NetworkClient.swift */,
+				034F5E7028AD53B80000926A /* WeatherClient.swift */,
 				0377C63928ABB41200575DA4 /* ReachabilityManager.swift */,
 				0377C64028ABCA3300575DA4 /* PreferenceManager.swift */,
+				034F5E7228AD5C280000926A /* RealmClient.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -267,11 +273,13 @@
 				0377C61228AAC88F00575DA4 /* ContentView.swift in Sources */,
 				0377C62428AACD9D00575DA4 /* ForecastListDTO.swift in Sources */,
 				0377C64128ABCA3300575DA4 /* PreferenceManager.swift in Sources */,
+				034F5E7328AD5C280000926A /* RealmClient.swift in Sources */,
 				0377C63A28ABB41200575DA4 /* ReachabilityManager.swift in Sources */,
 				0377C61028AAC88F00575DA4 /* weatherTestAppApp.swift in Sources */,
 				0377C63D28ABB59100575DA4 /* WeatherDB.swift in Sources */,
 				0377C64328ABFF6200575DA4 /* CityWeatherViewModel.swift in Sources */,
 				0377C62928AAD98200575DA4 /* HomeScreenView.swift in Sources */,
+				034F5E7128AD53B80000926A /* WeatherClient.swift in Sources */,
 				0377C62228AACAC400575DA4 /* WeatherDTO.swift in Sources */,
 				0377C61F28AAC8CE00575DA4 /* NetworkClient.swift in Sources */,
 			);

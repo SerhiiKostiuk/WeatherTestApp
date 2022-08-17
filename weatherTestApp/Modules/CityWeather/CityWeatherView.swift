@@ -11,27 +11,22 @@ import Kingfisher
 struct CityWeatherView: View {
 
     //MARK: - @AppStorage
-
     @AppStorage(KeyPreference.temperatureScale.rawValue, store: .standard) var temperatureScale: TemperatureScale = .kelvin
 
     //MARK: - @StateObject
     @StateObject private var viewModel = CityWeatherViewModel()
 
     //MARK: - Private Property
-
     private let model: WeatherDTO
 
     //MARK: - Initializer
-
     init(model: WeatherDTO) {
         self.model = model
     }
 
     //MARK: - Body
-
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-
             VStack(spacing: 12) {
                 Text(model.cityName)
                     .font(.system(size: 20, weight: .bold, design: .rounded))
@@ -63,10 +58,12 @@ struct CityWeatherView: View {
         .onAppear {
             viewModel.getForecast(for: model.cityId)
         }
+        .onDisappear {
+            viewModel.invalidate()
+        }
     }
 
     //MARK: - Private Func
-
     @ViewBuilder private func createCell(for model: ForecastDTO) -> some View {
         HStack(spacing: 20) {
             VStack(alignment: .center, spacing: 0) {

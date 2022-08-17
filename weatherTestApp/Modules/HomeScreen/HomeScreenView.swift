@@ -12,18 +12,15 @@ struct HomeScreenView: View {
     @StateObject private var viewModel = HomeScreenViewModel()
 
     //MARK: - @State
-
     @State private var selectedId: UInt?
     @State private var isNavigationLinkActive = false
     @State private var isPresentedSetting = false
     @State private var isShowMap = false
 
     //MARK: - @Environment
-
     @Environment(\.isSearching) var isSearching
 
     //MARK: - Body
-
     var body: some View {
         NavigationView {
             GeometryReader { proxy in
@@ -82,7 +79,6 @@ struct HomeScreenView: View {
                             .frame(width: 20, height: 20)
                             .padding(.all, 10)
                     }
-
                 }
             }
         }

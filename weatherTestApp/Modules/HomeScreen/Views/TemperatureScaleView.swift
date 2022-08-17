@@ -17,7 +17,6 @@ struct TemperatureScaleView: View {
     @Binding private var isShow: Bool
 
     //MARK: - Initializer
-
     init(isShow: Binding<Bool>) {
         self._isShow = isShow
     }
@@ -25,7 +24,6 @@ struct TemperatureScaleView: View {
     //MARK: - Body
     var body: some View {
         VStack(spacing: 12) {
-
             ForEach(TemperatureScale.allCases, id: \.rawValue) { scale in
                 Button {
                     temperatureScale = scale
@@ -52,5 +50,4 @@ struct TemperatureScaleView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(RoundedRectangle(cornerRadius: 12).fill(Color.black.opacity(0.8)))
     }
-
 }

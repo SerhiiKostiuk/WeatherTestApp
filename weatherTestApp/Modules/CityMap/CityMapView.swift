@@ -39,7 +39,6 @@ struct CityMapView: View {
         NavigationView {
             Map(coordinateRegion: $mapRegion, interactionModes: .all, showsUserLocation: true, annotationItems: locations) { location in
                 MapAnnotation(coordinate: location.coordinate) {
-
                    Image("map_pin").frame(width: 20, height: 20)
                 }
             }

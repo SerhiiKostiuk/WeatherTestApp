@@ -12,18 +12,16 @@ import Kingfisher
 struct CityCellView: View {
     
     // MARK: - @AppStorage
-    
     @AppStorage(KeyPreference.temperatureScale.rawValue, store: .standard) var temperatureScale: TemperatureScale = .kelvin
-    
-    //MARK: - Private Property
-    
-    private let model: WeatherDTO
-    
+
+    //MARK: - Private @Binding
     @Binding private var isShowModal: Bool
     @Binding private var selectedId: UInt?
+
+    //MARK: - Private Property
+    private let model: WeatherDTO
     
     //MARK: - Initializer
-    
     init(model: WeatherDTO, isShowModal: Binding<Bool>, selectedId: Binding<UInt?>) {
         self.model = model
         self._isShowModal = isShowModal
@@ -31,7 +29,6 @@ struct CityCellView: View {
     }
     
     //MARK: - Body
-    
     var body: some View {
         HStack(alignment: .top, spacing: 20) {
             VStack(alignment: .leading, spacing: 0) {

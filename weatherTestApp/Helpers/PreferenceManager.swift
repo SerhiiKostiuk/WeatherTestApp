@@ -18,7 +18,7 @@ enum TemperatureScale: String, CaseIterable {
 }
 
 extension TemperatureScale {
-
+    //MARK: - Public Properties
     var title: String {
         switch self {
         case .fahrenheit:
@@ -41,6 +41,7 @@ extension TemperatureScale {
         }
     }
 
+    //MARK: - Public Func
     func convert(temperature: Double) -> Int {
         switch self {
         case .fahrenheit:

@@ -9,12 +9,15 @@ import Foundation
 import Reachability
 
 class ReachabilityManager {
-    let reachability: Reachability
+    //MARK: - Private Properties
+    private let reachability: Reachability
 
+    //MARK: - Initializers
     init() {
         reachability = try! Reachability()
     }
 
+    //MARK: - Public Func
     func connectionAvailable() -> Bool {
         switch reachability.connection {
         case .wifi, .cellular:
